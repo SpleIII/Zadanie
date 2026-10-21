@@ -361,7 +361,7 @@ section {
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.9rem;
+  gap: 1.25rem;
   margin-bottom: 4rem;
 }
 
@@ -539,10 +539,14 @@ section {
   color: var(--muted);
 }
 
+.features {
+  margin-bottom: 4rem;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 0.9rem;
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
