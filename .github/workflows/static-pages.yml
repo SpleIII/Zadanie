@@ -1,0 +1,52 @@
+name: Static Site CI/CD
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'projects/hello-static/**'
+      - '.github/workflows/static-pages.yml'
+  pull_request:
+    paths:
+      - 'projects/hello-static/**'
+      - '.github/workflows/static-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Проверка и деплой на Pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Проверить структуру сайта
+        run: |
+          cd projects/hello-static/public
+          for file in index.html style.css script.js; do
+            if [ ! -f "$file" ]; then
+              echo "❌ Не найден файл: $file"
+              exit 1
+            fi
+          done
+          grep -q 'style.css' index.html || { echo "❌ index.html не подключает style.css"; exit 1; }
+          grep -q 'script.js' index.html || { echo "❌ index.html не подключает script.js"; exit 1; }
+          echo "✅ Структура сайта в порядке"
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: projects/hello-static/public
+      - id: deployment
+        uses: actions/deploy-pages@v4
