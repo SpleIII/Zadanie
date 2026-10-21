@@ -1,0 +1,6 @@
+/hello-go-releases
+/hello-go-*
+.env
+.idea/
+.vscode/
+*.iml
