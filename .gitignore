@@ -1,0 +1,41 @@
+# ---- Rust ----
+projects/hello-rust/target/
+
+# ---- Go ----
+projects/hello-go/hello-go
+projects/hello-go-releases/hello-go
+projects/hello-go-releases/hello-go-*
+projects/hello-gui/hello-gui
+projects/hex-loader/hex-loader
+projects/hex-loader/hex-loader-*
+projects/arduino-manager/arduino-manager
+projects/arduino-manager/arduino-manager-*
+
+# ---- Python ----
+projects/PythonCLIRep/__pycache__/
+projects/PythonCLIRep/**/__pycache__/
+projects/PythonCLIRep/*.pyc
+projects/PythonCLIRep/.venv/
+projects/PythonCLIRep/venv/
+projects/PythonCLIRep/build/
+projects/PythonCLIRep/dist/
+projects/PythonCLIRep/*.spec
+projects/PythonCLIRep/.pytest_cache/
+projects/PythonCLIRep/.ruff_cache/
+projects/PythonCLIRep/*.egg-info/
+
+# ---- .NET ----
+projects/hello-dotnet/bin/
+projects/hello-dotnet/obj/
+projects/hello-dotnet/publish/
+
+# ---- Node / Vite ----
+projects/hello-pages/node_modules/
+projects/hello-pages/dist/
+
+# ---- Общее ----
+.env
+.idea/
+.vscode/
+*.iml
+*.log
