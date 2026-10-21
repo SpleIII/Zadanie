@@ -1,0 +1,83 @@
+name: Go CI/CD
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'projects/hello-go/**'
+      - '.github/workflows/go-ghcr.yml'
+  pull_request:
+    paths:
+      - 'projects/hello-go/**'
+      - '.github/workflows/go-ghcr.yml'
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: projects/hello-go
+
+jobs:
+  build:
+    name: Проверка и сборка образа
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Подключить Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+          cache: true
+
+      - name: Проверить форматирование
+        run: |
+          UNFORMATTED=$(gofmt -l .)
+          if [ -n "$UNFORMATTED" ]; then
+            echo "❌ Файлы без gofmt:"
+            echo "$UNFORMATTED"
+            exit 1
+          fi
+
+      - name: Прогнать go vet
+        run: go vet ./...
+
+      - name: Выполнить тесты
+        run: go test ./... -v
+
+      - name: Собрать бинарник
+        run: CGO_ENABLED=0 go build -o hello-go .
+
+      - name: Авторизоваться в GHCR
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Подготовить Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Собрать метаданные образа
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/spleiii/zadanie/hello-go
+          tags: |
+            type=sha,prefix=,format=short
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Собрать и отправить образ
+        uses: docker/build-push-action@v6
+        with:
+          context: projects/hello-go
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
