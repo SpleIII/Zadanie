@@ -83,6 +83,10 @@ git push origin hello-go-releases-v1.0.0
 * Образы в GHCR: `ghcr.io/spleiii/zadanie/hello-rust`, `ghcr.io/spleiii/zadanie/hello-go`
 * Готовые релизы: [Releases](https://github.com/SpleIII/Zadanie/releases)
 
+Сайт сделан в стиле консоли сборки: тёмная и светлая темы, анимированный
+лог прогона пайплайна, копирование команд, счётчик с сохранением в
+`localStorage`. Ни сборщика, ни зависимостей — только HTML, CSS и JS.
+
 ```bash
 docker pull ghcr.io/spleiii/zadanie/hello-rust:latest
 docker run --rm ghcr.io/spleiii/zadanie/hello-rust
