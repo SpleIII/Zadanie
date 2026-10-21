@@ -1,0 +1,80 @@
+name: .NET CI/CD (Releases)
+
+on:
+  push:
+    branches: [main]
+    tags: ['hello-dotnet-v*']
+    paths:
+      - 'projects/hello-dotnet/**'
+      - '.github/workflows/dotnet-releases.yml'
+  pull_request:
+    paths:
+      - 'projects/hello-dotnet/**'
+      - '.github/workflows/dotnet-releases.yml'
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: projects/hello-dotnet
+
+jobs:
+  test:
+    name: Проверки
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet restore
+      - run: dotnet build --no-restore -c Release
+      - run: dotnet test --no-build -c Release --verbosity normal
+
+  build-linux:
+    name: Сборка для Linux
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet publish src/HelloDotnet.csproj -c Release -o publish
+      - run: tar -czf hello-dotnet-linux-x64.tar.gz -C publish .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-linux
+          path: hello-dotnet-linux-x64.tar.gz
+
+  build-windows:
+    name: Сборка для Windows
+    needs: test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet publish src/HelloDotnet.csproj -c Release -o publish
+      - run: Compress-Archive -Path publish\* -DestinationPath hello-dotnet-windows-x64.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-windows
+          path: hello-dotnet-windows-x64.zip
+
+  release:
+    name: Публикация релиза
+    needs: [build-linux, build-windows]
+    if: startsWith(github.ref, 'refs/tags/hello-dotnet-')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*
+          generate_release_notes: true
