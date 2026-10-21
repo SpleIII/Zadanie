@@ -99,5 +99,5 @@ jobs:
       - name: Прикрепить файлы к релизу
         uses: softprops/action-gh-release@v2
         with:
-          files: hello-go-${{ matrix.suffix }}
+          files: projects/hello-go-releases/hello-go-${{ matrix.suffix }}
           generate_release_notes: true

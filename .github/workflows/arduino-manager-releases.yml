@@ -69,6 +69,6 @@ jobs:
         run: go build -o ${{ matrix.artifact }}${{ matrix.ext }} .
       - uses: softprops/action-gh-release@v2
         with:
-          files: ${{ matrix.artifact }}${{ matrix.ext }}
+          files: projects/arduino-manager/${{ matrix.artifact }}${{ matrix.ext }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

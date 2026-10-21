@@ -92,5 +92,5 @@ jobs:
       - name: Прикрепить файлы к релизу
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/${{ matrix.artifact }}
+          files: projects/hello-python/dist/${{ matrix.artifact }}
           generate_release_notes: true

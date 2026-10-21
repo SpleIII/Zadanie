@@ -148,5 +148,5 @@ jobs:
       - name: Прикрепить файлы к релизу
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ matrix.artifact }}
+          files: projects/hello-gui/${{ matrix.artifact }}
           generate_release_notes: true

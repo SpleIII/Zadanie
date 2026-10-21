@@ -44,7 +44,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dotnet-linux
-          path: hello-dotnet-linux-x64.tar.gz
+          path: projects/hello-dotnet/hello-dotnet-linux-x64.tar.gz
 
   build-windows:
     name: Сборка для Windows
@@ -60,7 +60,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dotnet-windows
-          path: hello-dotnet-windows-x64.zip
+          path: projects/hello-dotnet/hello-dotnet-windows-x64.zip
 
   release:
     name: Публикация релиза
