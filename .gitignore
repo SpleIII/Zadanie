@@ -12,17 +12,17 @@ projects/arduino-manager/arduino-manager
 projects/arduino-manager/arduino-manager-*
 
 # ---- Python ----
-projects/PythonCLIRep/__pycache__/
-projects/PythonCLIRep/**/__pycache__/
-projects/PythonCLIRep/*.pyc
-projects/PythonCLIRep/.venv/
-projects/PythonCLIRep/venv/
-projects/PythonCLIRep/build/
-projects/PythonCLIRep/dist/
-projects/PythonCLIRep/*.spec
-projects/PythonCLIRep/.pytest_cache/
-projects/PythonCLIRep/.ruff_cache/
-projects/PythonCLIRep/*.egg-info/
+projects/hello-python/__pycache__/
+projects/hello-python/**/__pycache__/
+projects/hello-python/*.pyc
+projects/hello-python/.venv/
+projects/hello-python/venv/
+projects/hello-python/build/
+projects/hello-python/dist/
+projects/hello-python/*.spec
+projects/hello-python/.pytest_cache/
+projects/hello-python/.ruff_cache/
+projects/hello-python/*.egg-info/
 
 # ---- .NET ----
 projects/hello-dotnet/bin/

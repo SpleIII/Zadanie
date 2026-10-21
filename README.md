@@ -16,7 +16,7 @@
 | [`hello-rust`](projects/hello-rust) | Rust + Docker | образ в GHCR | push в `main` |
 | [`hello-go`](projects/hello-go) | Go + Docker | образ в GHCR | push в `main` |
 | [`hello-go-releases`](projects/hello-go-releases) | Go | бинарники (5 платформ) | тег `hello-go-releases-v*` |
-| [`PythonCLIRep`](projects/PythonCLIRep) | Python + PyInstaller | бинарники (3 ОС) | тег `PythonCLIRep-v*` |
+| [`hello-python`](projects/hello-python) | Python + PyInstaller | бинарники (3 ОС) | тег `hello-python-v*` |
 | [`hello-dotnet`](projects/hello-dotnet) | C# / .NET 8 | бинарники (2 платформы) | тег `hello-dotnet-v*` |
 | [`hello-gui`](projects/hello-gui) | Go + Fyne | бинарники (3 платформы) | тег `hello-gui-v*` |
 | [`hex-loader`](projects/hex-loader) | Go + Fyne | бинарники (3 платформы) | тег `hex-loader-v*` |
@@ -75,7 +75,7 @@ cd projects/hello-rust && cargo run --release
 cd projects/hello-go && go run .
 
 # Python
-cd projects/PythonCLIRep && python main.py
+cd projects/hello-python && python main.py
 
 # .NET
 cd projects/hello-dotnet && dotnet run --project src
