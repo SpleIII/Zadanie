@@ -1,41 +1,13 @@
-# ---- Rust ----
-projects/hello-rust/target/
-
-# ---- Go ----
-projects/hello-go/hello-go
-projects/hello-go-releases/hello-go
-projects/hello-go-releases/hello-go-*
-projects/hello-gui/hello-gui
-projects/hex-loader/hex-loader
-projects/hex-loader/hex-loader-*
-projects/arduino-manager/arduino-manager
-projects/arduino-manager/arduino-manager-*
-
-# ---- Python ----
-projects/hello-python/__pycache__/
-projects/hello-python/**/__pycache__/
-projects/hello-python/*.pyc
-projects/hello-python/.venv/
-projects/hello-python/venv/
-projects/hello-python/build/
-projects/hello-python/dist/
-projects/hello-python/*.spec
-projects/hello-python/.pytest_cache/
-projects/hello-python/.ruff_cache/
-projects/hello-python/*.egg-info/
-
-# ---- .NET ----
-projects/hello-dotnet/bin/
-projects/hello-dotnet/obj/
-projects/hello-dotnet/publish/
-
-# ---- Node / Vite ----
-projects/hello-pages/node_modules/
-projects/hello-pages/dist/
-
-# ---- Общее ----
+# ---- Переменные окружения ----
 .env
-.idea/
+.env.*
+!.env.example
+
+# ---- Редакторы и ОС ----
 .vscode/
+.idea/
 *.iml
 *.log
+*.tmp
+.DS_Store
+Thumbs.db

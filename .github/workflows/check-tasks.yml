@@ -1,0 +1,77 @@
+name: Check Tasks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'README.md'
+      - '.github/workflows/check-tasks.yml'
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Проверка репозиториев заданий
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Убедиться, что все задания на месте
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          failed=0
+
+          for repo in \
+            hello-rust \
+            hello-go \
+            hello-go-releases \
+            hello-python \
+            hello-dotnet \
+            hello-gui \
+            hex-loader \
+            arduino-manager \
+            hello-static \
+            hello-pages
+          do
+            code=$(curl -s -o /tmp/repo.json -w '%{http_code}' \
+              -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H 'Accept: application/vnd.github+json' \
+              "https://api.github.com/repos/SpleIII/$repo")
+
+            if [ "$code" != "200" ]; then
+              echo "❌ $repo — недоступен (HTTP $code)"
+              failed=1
+              continue
+            fi
+
+            archived=$(grep -o '"archived": *[a-z]*' /tmp/repo.json | head -1 | awk '{print $2}')
+            size=$(grep -o '"size": *[0-9]*' /tmp/repo.json | head -1 | awk '{print $2}')
+
+            if [ "$archived" = "true" ]; then
+              echo "❌ $repo — архивирован"
+              failed=1
+              continue
+            fi
+
+            if [ "${size:-0}" -lt 100 ]; then
+              echo "❌ $repo — пустой репозиторий"
+              failed=1
+              continue
+            fi
+
+            echo "✅ $repo — на месте"
+          done
+
+          if [ "$failed" -ne 0 ]; then
+            echo "Индекс ссылается на недоступные задания."
+            exit 1
+          fi
+
+          echo "Все 10 заданий доступны."
