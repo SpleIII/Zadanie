@@ -36,13 +36,15 @@
 ## Как это устроено
 
 ```mermaid
-flowchart LR
+flowchart TB
   subgraph containers["Контейнеры → GHCR"]
+    direction LR
     rust["hello-rust<br/>Rust + Docker"]
     go["hello-go<br/>Go + Docker"]
   end
 
   subgraph releases["Бинарники → Releases"]
+    direction LR
     gorel["hello-go-releases<br/>5 платформ"]
     py["hello-python<br/>3 ОС"]
     dotnet["hello-dotnet<br/>2 платформы"]
@@ -52,6 +54,7 @@ flowchart LR
   end
 
   subgraph pages["Сайты → GitHub Pages"]
+    direction LR
     static["hello-static<br/>HTML + CSS + JS"]
     spa["hello-pages<br/>React + Vite"]
   end
