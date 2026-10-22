@@ -52,7 +52,7 @@ jobs:
               continue
             fi
 
-            if grep -q '"archived":true' /tmp/meta.json; then
+            if grep -q '"archived": *true' /tmp/meta.json; then
               echo "FAIL $repo — архивирован"
               failed=1
               continue
@@ -70,7 +70,8 @@ jobs:
               continue
             fi
 
-            files=$(grep -c '"type":"file"' /tmp/files.json || true)
+            # API отдаёт pretty-printed JSON, поэтому допускаем пробелы.
+            files=$(grep -c '"type": *"file"' /tmp/files.json || true)
             if [ "${files:-0}" -lt 1 ]; then
               echo "FAIL $repo — пустой репозиторий"
               failed=1
