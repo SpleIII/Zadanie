@@ -9,18 +9,18 @@
 
 ## Задания
 
-| # | Задание | Стек | Что публикует | Триггер |
+| # | Задание | Стек | Что публикует | Релиз |
 |:-:|---|---|---|---|
-| 1 | [hello-rust](https://github.com/SpleIII/hello-rust) | Rust + Docker | образ в GHCR | push в `main` |
-| 2 | [hello-go](https://github.com/SpleIII/hello-go) | Go + Docker | образ в GHCR | push в `main` |
-| 3 | [hello-go-releases](https://github.com/SpleIII/hello-go-releases) | Go | бинарники (5 платформ) | тег `v*` |
-| 4 | [hello-python](https://github.com/SpleIII/hello-python) | Python + PyInstaller | бинарники (3 ОС) | тег `v*` |
-| 5 | [hello-dotnet](https://github.com/SpleIII/hello-dotnet) | C# / .NET 8 | бинарники (2 платформы) | тег `v*` |
-| 6 | [hello-gui](https://github.com/SpleIII/hello-gui) | Go + Fyne | бинарники (3 платформы) | тег `v*` |
-| 7 | [hex-loader](https://github.com/SpleIII/hex-loader) | Go + Fyne | бинарники (3 платформы) | тег `v*` |
-| 8 | [arduino-manager](https://github.com/SpleIII/arduino-manager) | Go + Fyne | бинарники (3 платформы) | тег `v*` |
-| 9 | [hello-static](https://github.com/SpleIII/hello-static) | HTML + CSS + JS | сайт на GitHub Pages | push в `main` |
-| 10 | [hello-pages](https://github.com/SpleIII/hello-pages) | React + Vite | SPA на GitHub Pages | push в `main` |
+| 1 | [hello-rust](https://github.com/SpleIII/hello-rust) | Rust + Docker | образ в GHCR | [v1.0.0](https://github.com/SpleIII/hello-rust/releases/tag/v1.0.0) |
+| 2 | [hello-go](https://github.com/SpleIII/hello-go) | Go + Docker | образ в GHCR | [v1.0.0](https://github.com/SpleIII/hello-go/releases/tag/v1.0.0) |
+| 3 | [hello-go-releases](https://github.com/SpleIII/hello-go-releases) | Go | бинарники (5 платформ) | [v1.0.0](https://github.com/SpleIII/hello-go-releases/releases/tag/v1.0.0) |
+| 4 | [hello-python](https://github.com/SpleIII/hello-python) | Python + PyInstaller | бинарники (3 ОС) | [v1.0.0](https://github.com/SpleIII/hello-python/releases/tag/v1.0.0) |
+| 5 | [hello-dotnet](https://github.com/SpleIII/hello-dotnet) | C# / .NET 8 | бинарники (2 платформы) | [v1.0.0](https://github.com/SpleIII/hello-dotnet/releases/tag/v1.0.0) |
+| 6 | [hello-gui](https://github.com/SpleIII/hello-gui) | Go + Fyne | бинарники (3 платформы) | [v1.0.0](https://github.com/SpleIII/hello-gui/releases/tag/v1.0.0) |
+| 7 | [hex-loader](https://github.com/SpleIII/hex-loader) | Go + Fyne | бинарники (3 платформы) | [v1.0.0](https://github.com/SpleIII/hex-loader/releases/tag/v1.0.0) |
+| 8 | [arduino-manager](https://github.com/SpleIII/arduino-manager) | Go + Fyne | бинарники (3 платформы) | [v1.0.0](https://github.com/SpleIII/arduino-manager/releases/tag/v1.0.0) |
+| 9 | [hello-static](https://github.com/SpleIII/hello-static) | HTML + CSS + JS | сайт на GitHub Pages | [v1.0.0](https://github.com/SpleIII/hello-static/releases/tag/v1.0.0) |
+| 10 | [hello-pages](https://github.com/SpleIII/hello-pages) | React + Vite | SPA на GitHub Pages | [v1.0.0](https://github.com/SpleIII/hello-pages/releases/tag/v1.0.0) |
 
 ### Живые ссылки
 
@@ -29,7 +29,7 @@
 | Статический сайт | <https://spleiii.github.io/hello-static/> |
 | React SPA | <https://spleiii.github.io/hello-pages/> |
 | Образы в GHCR | `ghcr.io/spleiii/hello-rust`, `ghcr.io/spleiii/hello-go` |
-| Релизы | [Releases](https://github.com/SpleIII/hello-go-releases/releases) |
+| Релизы | [hello-go-releases](https://github.com/SpleIII/hello-go-releases/releases) · [hello-python](https://github.com/SpleIII/hello-python/releases) · [hello-dotnet](https://github.com/SpleIII/hello-dotnet/releases) · [hello-gui](https://github.com/SpleIII/hello-gui/releases) · [hex-loader](https://github.com/SpleIII/hex-loader/releases) · [arduino-manager](https://github.com/SpleIII/arduino-manager/releases) |
 
 ---
 
