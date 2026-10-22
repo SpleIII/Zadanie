@@ -40,33 +40,44 @@ jobs:
             hello-static \
             hello-pages
           do
-            code=$(curl -s -o /tmp/repo.json -w '%{http_code}' \
+            # Метаданные репозитория: существование и архивность.
+            code=$(curl -s -o /tmp/meta.json -w '%{http_code}' \
               -H "Authorization: Bearer $GITHUB_TOKEN" \
               -H 'Accept: application/vnd.github+json' \
               "https://api.github.com/repos/SpleIII/$repo")
 
             if [ "$code" != "200" ]; then
-              echo "❌ $repo — недоступен (HTTP $code)"
+              echo "FAIL $repo — недоступен (HTTP $code)"
               failed=1
               continue
             fi
 
-            archived=$(grep -o '"archived": *[a-z]*' /tmp/repo.json | head -1 | awk '{print $2}')
-            size=$(grep -o '"size": *[0-9]*' /tmp/repo.json | head -1 | awk '{print $2}')
-
-            if [ "$archived" = "true" ]; then
-              echo "❌ $repo — архивирован"
+            if grep -q '"archived":true' /tmp/meta.json; then
+              echo "FAIL $repo — архивирован"
               failed=1
               continue
             fi
 
-            if [ "${size:-0}" -lt 100 ]; then
-              echo "❌ $repo — пустой репозиторий"
+            # Содержимое: в репозитории задания должны быть файлы.
+            code=$(curl -s -o /tmp/files.json -w '%{http_code}' \
+              -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H 'Accept: application/vnd.github+json' \
+              "https://api.github.com/repos/SpleIII/$repo/contents/")
+
+            if [ "$code" != "200" ]; then
+              echo "FAIL $repo — не удалось прочитать содержимое (HTTP $code)"
               failed=1
               continue
             fi
 
-            echo "✅ $repo — на месте"
+            files=$(grep -c '"type":"file"' /tmp/files.json || true)
+            if [ "${files:-0}" -lt 1 ]; then
+              echo "FAIL $repo — пустой репозиторий"
+              failed=1
+              continue
+            fi
+
+            echo "OK $repo — на месте, файлов: $files"
           done
 
           if [ "$failed" -ne 0 ]; then
